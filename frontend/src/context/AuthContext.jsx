@@ -66,16 +66,26 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, [state.token]);
 
+  // const login = async (email, password) => {
+  //   try {
+  //     const response = await api.post('/auth/login', { email, password });
+  //     dispatch({ type: 'LOGIN', payload: response.data });
+  //     return { success: true };
+  //   } catch (error) {
+  //     dispatch({ type: 'AUTH_ERROR', payload: error.response?.data?.message });
+  //     return { success: false, error: error.response?.data?.message };
+  //   }
+  // };
+
   const login = async (email, password) => {
-    try {
-      const response = await api.post('/auth/login', { email, password });
-      dispatch({ type: 'LOGIN', payload: response.data });
-      return { success: true };
-    } catch (error) {
-      dispatch({ type: 'AUTH_ERROR', payload: error.response?.data?.message });
-      return { success: false, error: error.response?.data?.message };
-    }
-  };
+  try {
+    const res = await api.post('/auth/login', { email, password });
+    return res.data; // contains token and user
+  } catch (err) {
+    return { error: err.response?.data?.message || "Login failed" };
+  }
+};
+
 
   const register = async (userData) => {
     try {

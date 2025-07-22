@@ -36,11 +36,17 @@ const Login = () => {
         result = await login(formData.email, formData.password);
       }
 
-      if (result.success) {
-        navigate('/');
-      } else {
-        setError(result.error || 'Authentication failed');
-      }
+      // if (result.success) {
+      //   navigate('/');
+      // } else {
+      //   setError(result.error || 'Authentication failed');
+      // }
+      if (result.token) {
+  localStorage.setItem("token", result.token);
+  navigate('/');
+} else {
+  setError(result.message || 'Authentication failed');
+}
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {
