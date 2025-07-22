@@ -21,7 +21,7 @@
 import axios from "axios";
 
 // Always use deployed backend URL
-const API_URL = "https://bharati-news.onrender.com/api";
+const API_URL = "https://bharati-news.onrender.com";
 
 const api = axios.create({
   baseURL: API_URL,
